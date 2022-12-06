@@ -1,28 +1,32 @@
 
-let add = document.querySelector("#add");
-let substract = document.querySelector("#substract");
+let count = 0;
 
-console.log(add, substract);
+const value = document.querySelector("#value");
+const btns = document.querySelectorAll(".btn");
 
-add.addEventListener("click", function() {
-    let output = document.querySelector("#output");
-    let result = Number(output.innerText) + 1;
+console.log(btns);
 
-    if (result > 10) {
-        result = 0;
-    }
-    
-    output.innerText = result;
-});
-
-substract.addEventListener("click", function() {
-    let output = document.querySelector("#output");
-    let result = Number(output.innerText) -1;
-
-    if (result < 0) {
-        result = 0;
-    }
-
-    output.innerText = result;
-});
-
+btns.forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+        const styles = e.currentTarget.classList;
+        
+        if(styles.contains("decrease")) {
+            count--;
+        } else if (styles.contains("increase")) {
+            count++;
+        } else {
+            count = 0;
+        }
+        
+        if (count > 0) {
+            value.style.color = "green";
+        }
+        if (count < 0) {
+            value.style.color = "red";
+        }
+        if (count === 0) {
+            value.style.color = "#222"
+        }
+        value.textContent = count;
+    })
+})
